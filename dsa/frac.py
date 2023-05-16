@@ -26,6 +26,21 @@ class Fraction:
 
     def show(self):
         print("{:d}/{:d}".format(self.num, self.den))
+      
+    def __sub__(self, other_fraction):
+      new_num = self.num*other_fraction.den - self.den*other_fraction.num
+      new_den = self.den*other_fraction.den
+      cmmn=gcd(new_num, new_den)
+      return Fraction(new_num // cmmn, new_den // cmmn)
+
+    def __mul__(self, other_fraction):
+      new_num = self.num*other_fraction.num
+      new_den = self.den*other_fraction.den
+      cmmn=gcd(new_num, new_den)
+      return Fraction(new_num // cmmn, new_den // cmmn)
+
+    def __le__(self, other_fraction):
+      return True if self.num/self.den < other_fraction.num/other_fraction.den else False
 
 x = Fraction(1, 2)
 x.show()
@@ -33,3 +48,6 @@ y = Fraction(2, 3)
 print(y)
 print(x + y)
 print(x == y)
+print(x-y)
+print(x*y)
+print(x<=y)
